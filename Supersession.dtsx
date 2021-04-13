@@ -1,0 +1,1748 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/17/2020 10:00:39 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="PRB-BI-JDA"
+  DTS:CreatorName="PRB-BI-JDA\abedi"
+  DTS:DTSID="{3AAA8032-F688-4A8C-B2FD-12CBF1DEAE0F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.93"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package2"
+  DTS:PackageType="5"
+  DTS:VersionBuild="15"
+  DTS:VersionGUID="{4772AC3D-868F-4C7C-9FC5-649BC6F6386D}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[JDA Prod v18]"
+      DTS:CreationName="ORACLE"
+      DTS:DTSID="{C87A7D64-65CB-4E71-9836-0E7961C4FA4F}"
+      DTS:ObjectName="JDA Prod v18">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager>
+          <OraConnectionString>SERVER=64.26.225.183:1521/PRBPRDDB;USERNAME=PRBMULE;WINAUTH=0;data source=64.26.225.183:1521/prbprddb;user id=prbmule;</OraConnectionString>
+          <OraPassword
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAane2v4/vo0SbkJAvnNitZgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADL/k3cPyAPdPSfgZYKPxcpv7IetbYpkVBW08oqPZ8JHwAAAAAOgAAAAAIAACAAAACs1bJ/D7FA9ubTztRdm0gmPxBMrinxSijLNS0q/hks/yAAAADoMo2cGMIygOkEH7FRNKIvgPjrjspF19eOMNx1/YjDRUAAAAA0ZvLY1E3kNOB5zCpJaDhu//8hf98kdPfNf1IqLmJjCDa0socnuv1mnIJ3OLKving+IBucGYhaX7ggo/IH5soR</OraPassword>
+          <OraRetain>False</OraRetain>
+          <OraInitialCatalog></OraInitialCatalog>
+          <OraServerName>64.26.225.183:1521/PRBPRDDB</OraServerName>
+          <OraUserName>PRBMULE</OraUserName>
+          <OraOracleHome></OraOracleHome>
+          <OraOracleHome64></OraOracleHome64>
+          <OraWinAuthentication>False</OraWinAuthentication>
+          <OraEnableDetailedTracing>False</OraEnableDetailedTracing>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+      DTS:CreationName="AzureStorage"
+      DTS:DTSID="{00FBA197-1972-4B5C-B127-5A3FEFCB57A0}"
+      DTS:ObjectName="SSIS Connection Manager for Azure Storage">
+      <DTS:ObjectData>
+        <AzureStorageConnectionManager
+          ConnectionString="AccountName=snowflakeprb;DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;">
+          <AccountKey
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAane2v4/vo0SbkJAvnNitZgAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAByOyZUzXrYhtELX0q8GUR9JoY3B1BmNQdSsWJfN04ZnQAAAAAOgAAAAAIAACAAAACckYiCNzYKq8ru6Kc/GuxhA+wiBqeQ/Z7/Hhkez5qSUcAAAAAbHJfYAjDTP7aPoXMnb6vVjdyfOny1pldmnE4uoltIpPrvpfYBDHsu4uI9Yls4bJWkUvnwI957MiW1oZpbPJRHmk0M5vfieL0enr8dTPKhDEOHdA0/DUxUB9nJYAQb1BOqSF3+5RKurpne7HPvy0l5KKmlohOn5Mmr+XzHUBJ8yKPO4xWq0Kky8pKUZEn158Xt2WfQD0J83J/u0pixcZ2mZWD5v9Z0TI3XumUNC6TkJ8srT84pYkpHt7twzmQDlUNAAAAAWriPyr25vsqdJB7aXR8wtgePf2JWwb/2n6tH+Jxfr7FjToMzJ0Xw1b8wtbVdWMX/qGl9f7MhSMbxBcAQpWF02g</AccountKey>
+        </AzureStorageConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{56036D8E-33A0-4112-B7E3-D5703C7C6E94}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;JDA\\Error\\Supersession_&quot; +(DT_WSTR,4)DATEPART(&quot;yyyy&quot;,GetDate()) +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;mm&quot;,GetDate()) ,2) +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;dd&quot;,GetDate()),2) + &quot;_&quot; +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;hh&quot;,GetDate()),2)+&#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;mi&quot;,GetDate()),2) + &quot;_fail.csv&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Supersession_FileName_fail">
+      <DTS:VariableValue
+        DTS:DataType="8">JDA\Error\Supersession_20210303_1345_fail.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9DF9BBB7-03A8-4435-B522-A62B77CE284A}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;JDA\\Error\\Supersession_validation_&quot; +(DT_WSTR,4)DATEPART(&quot;yyyy&quot;,GetDate()) +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;mm&quot;,GetDate()) ,2) +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;dd&quot;,GetDate()),2) + &quot;_&quot; +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;hh&quot;,GetDate()),2)+&#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;mi&quot;,GetDate()),2) + &quot;_fail.csv&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Supersession_FileName_fail_validations">
+      <DTS:VariableValue
+        DTS:DataType="8">JDA\Error\Supersession_validation_20210303_1345_fail.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BDBB0649-EC1F-41B3-8713-089E2D201D9A}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;JDA\\Supersession\\Supersession_&quot; +(DT_WSTR,4)DATEPART(&quot;yyyy&quot;,GetDate()) +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;mm&quot;,GetDate()) ,2) +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;dd&quot;,GetDate()),2) + &quot;_&quot; +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;hh&quot;,GetDate()),2)+&#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;mi&quot;,GetDate()),2) + &quot;_success.csv&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Supersession_FileName_success">
+      <DTS:VariableValue
+        DTS:DataType="8">JDA\Supersession\Supersession_20210303_1345_success.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CD9A99A1-E258-4FD0-A59F-6266BE914170}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;JDA\\Source_Logging\\Supersession_&quot; +(DT_WSTR,4)DATEPART(&quot;yyyy&quot;,GetDate()) +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;mm&quot;,GetDate()) ,2) +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;dd&quot;,GetDate()),2) + &quot;_&quot; +&#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;hh&quot;,GetDate()),2)+&#xA;RIGHT(&quot;0&quot; + (DT_WSTR,2)DATEPART(&quot;mi&quot;,GetDate()),2) + &quot;.csv&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Supersession_FileName_success_validations">
+      <DTS:VariableValue
+        DTS:DataType="8">JDA\Source_Logging\Supersession_20210303_1345.csv</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Supersession_SequenceContainer"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{96bdf574-c02d-4477-a14b-e023f4110bc9}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Supersession_SequenceContainer">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Supersession_SequenceContainer\Supersession_DFT"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{4752070c-0381-4eee-9d2f-71893b609508}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Supersession_DFT"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:PropertyExpression
+            DTS:Name="[Supersession_success_Azure Blob Destination].[Blob Name]">@[User::Supersession_FileName_success]</DTS:PropertyExpression>
+          <DTS:PropertyExpression
+            DTS:Name="[Supersession_fail_Azure Blob Destination].[Blob Name]">@[User::Supersession_FileName_fail]</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source"
+                  componentClassID="Microsoft.SSISOracleSrc"
+                  contactInfo="Oracle Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Oracle Source"
+                  name="Oracle Source"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="The name of the table to be fetched."
+                      expressionType="Notify"
+                      name="TableName"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select *
+from SCPOMGR.Supersession</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the number of rows fetched per batch."
+                      expressionType="Notify"
+                      name="BatchSize">1000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Determines the chunk size allocation for LOB columns"
+                      expressionType="Notify"
+                      name="LobChunkSize">32768</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The code page to use when code page information is unavailable from the data source."
+                      expressionType="Notify"
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Number of pre-fetched rows."
+                      expressionType="Notify"
+                      name="PrefetchCount">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">1</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Connections[ORACLEConnection]"
+                      connectionManagerID="Package.ConnectionManagers[JDA Prod v18]"
+                      connectionManagerRefId="Package.ConnectionManagers[JDA Prod v18]"
+                      description="The ORACLE runtime connection used to access the database."
+                      name="ORACLEConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output]"
+                      errorRowDisposition="RedirectRow"
+                      name="Oracle Source Output"
+                      truncationRowDisposition="RedirectRow">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[ITEM]"
+                          dataType="wstr"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ITEM]"
+                          length="50"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[ITEM]"
+                          name="ITEM" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[ALTITEM]"
+                          dataType="wstr"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ALTITEM]"
+                          length="50"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[ALTITEM]"
+                          name="ALTITEM" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[LOC]"
+                          dataType="wstr"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[LOC]"
+                          length="50"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[LOC]"
+                          name="LOC" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[EFF]"
+                          dataType="dbTimeStamp"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EFF]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[EFF]"
+                          name="EFF" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[DISC]"
+                          dataType="dbTimeStamp"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DISC]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[DISC]"
+                          name="DISC" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[ALTITEMPRIORITY]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ALTITEMPRIORITY]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[ALTITEMPRIORITY]"
+                          name="ALTITEMPRIORITY"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[USEUNTILLEVEL]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[USEUNTILLEVEL]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[USEUNTILLEVEL]"
+                          name="USEUNTILLEVEL"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[RESPECTSSLEVELSW]"
+                          dataType="i1"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RESPECTSSLEVELSW]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[RESPECTSSLEVELSW]"
+                          name="RESPECTSSLEVELSW" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[DMDUSAGERULE]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DMDUSAGERULE]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[DMDUSAGERULE]"
+                          name="DMDUSAGERULE"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[DRAWQTY]"
+                          dataType="r8"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DRAWQTY]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[DRAWQTY]"
+                          name="DRAWQTY" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[ROUNDINGQTY]"
+                          dataType="r8"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ROUNDINGQTY]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[ROUNDINGQTY]"
+                          name="ROUNDINGQTY" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[SUPPLYCAP]"
+                          dataType="r8"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SUPPLYCAP]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[SUPPLYCAP]"
+                          name="SUPPLYCAP" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[MINALLOCQTY]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MINALLOCQTY]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[MINALLOCQTY]"
+                          name="MINALLOCQTY"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[DMDGROUP]"
+                          dataType="wstr"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DMDGROUP]"
+                          length="50"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[DMDGROUP]"
+                          name="DMDGROUP" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[ENABLEOPT]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ENABLEOPT]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[ENABLEOPT]"
+                          name="ENABLEOPT"
+                          precision="38" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ITEM]"
+                          dataType="wstr"
+                          length="50"
+                          name="ITEM" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ALTITEM]"
+                          dataType="wstr"
+                          length="50"
+                          name="ALTITEM" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[LOC]"
+                          dataType="wstr"
+                          length="50"
+                          name="LOC" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EFF]"
+                          dataType="dbTimeStamp"
+                          name="EFF" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DISC]"
+                          dataType="dbTimeStamp"
+                          name="DISC" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ALTITEMPRIORITY]"
+                          dataType="numeric"
+                          name="ALTITEMPRIORITY"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[USEUNTILLEVEL]"
+                          dataType="numeric"
+                          name="USEUNTILLEVEL"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RESPECTSSLEVELSW]"
+                          dataType="i1"
+                          name="RESPECTSSLEVELSW" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DMDUSAGERULE]"
+                          dataType="numeric"
+                          name="DMDUSAGERULE"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DRAWQTY]"
+                          dataType="r8"
+                          name="DRAWQTY" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ROUNDINGQTY]"
+                          dataType="r8"
+                          name="ROUNDINGQTY" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SUPPLYCAP]"
+                          dataType="r8"
+                          name="SUPPLYCAP" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MINALLOCQTY]"
+                          dataType="numeric"
+                          name="MINALLOCQTY"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DMDGROUP]"
+                          dataType="wstr"
+                          length="50"
+                          name="DMDGROUP" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ENABLEOPT]"
+                          dataType="numeric"
+                          name="ENABLEOPT"
+                          precision="38" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output]"
+                      isErrorOut="true"
+                      name="Oracle Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ITEM]"
+                          dataType="wstr"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ITEM]"
+                          length="50"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ITEM]"
+                          name="ITEM" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ALTITEM]"
+                          dataType="wstr"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ALTITEM]"
+                          length="50"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ALTITEM]"
+                          name="ALTITEM" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[LOC]"
+                          dataType="wstr"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[LOC]"
+                          length="50"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[LOC]"
+                          name="LOC" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[EFF]"
+                          dataType="dbTimeStamp"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EFF]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[EFF]"
+                          name="EFF" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[DISC]"
+                          dataType="dbTimeStamp"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DISC]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[DISC]"
+                          name="DISC" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ALTITEMPRIORITY]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ALTITEMPRIORITY]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ALTITEMPRIORITY]"
+                          name="ALTITEMPRIORITY"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[USEUNTILLEVEL]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[USEUNTILLEVEL]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[USEUNTILLEVEL]"
+                          name="USEUNTILLEVEL"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[RESPECTSSLEVELSW]"
+                          dataType="i1"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RESPECTSSLEVELSW]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[RESPECTSSLEVELSW]"
+                          name="RESPECTSSLEVELSW" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[DMDUSAGERULE]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DMDUSAGERULE]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[DMDUSAGERULE]"
+                          name="DMDUSAGERULE"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[DRAWQTY]"
+                          dataType="r8"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DRAWQTY]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[DRAWQTY]"
+                          name="DRAWQTY" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ROUNDINGQTY]"
+                          dataType="r8"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ROUNDINGQTY]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ROUNDINGQTY]"
+                          name="ROUNDINGQTY" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[SUPPLYCAP]"
+                          dataType="r8"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SUPPLYCAP]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[SUPPLYCAP]"
+                          name="SUPPLYCAP" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[MINALLOCQTY]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MINALLOCQTY]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[MINALLOCQTY]"
+                          name="MINALLOCQTY"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[DMDGROUP]"
+                          dataType="wstr"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DMDGROUP]"
+                          length="50"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[DMDGROUP]"
+                          name="DMDGROUP" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ENABLEOPT]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ENABLEOPT]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ENABLEOPT]"
+                          name="ENABLEOPT"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination"
+                  componentClassID="Microsoft.ManagedComponentHost"
+                  contactInfo="© Microsoft Corporation; All Rights Reserved;"
+                  description="Loads data into a blob in Azure Storage. The supported file formats are: Text and Avro. To work with Azure Data Lake Storage Gen2, use Flexible File Destination with Azure Storage Connection Manager instead."
+                  name="Supersession_fail_Azure Blob Destination"
+                  validateExternalMetadata="False">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="The name of blob container"
+                      expressionType="Notify"
+                      name="Blob Container">jda2snowflakestage</property>
+                    <property
+                      dataType="System.String"
+                      description="The full name of blob"
+                      expressionType="Notify"
+                      name="Blob Name">JDA\Error\Supersession_20210303_1345_fail.csv</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The format of blob file"
+                      name="Blob Format"
+                      typeConverter="Microsoft.SqlServer.IntegrationService.CloudComponents.Utilities.AzBlobFormatEnumStringConverter">0</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Compress File"
+                      name="Compress File">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The compression type"
+                      name="Compression Type"
+                      typeConverter="Microsoft.SqlServer.IntegrationService.CloudComponents.Utilities.AzCompressionTypeEnumStringConverter">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The compression level"
+                      name="Compression Level"
+                      typeConverter="Microsoft.SqlServer.IntegrationService.CloudComponents.Utilities.AzCompressionLevelEnumStringConverter">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The character used to delimit columns in text file"
+                      name="Column Delimiter">|</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Column names in the first data row"
+                      name="First Row as Column Names">false</property>
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">AzBlobDest</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Connections[Azure Storage]"
+                      connectionManagerID="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+                      connectionManagerRefId="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+                      description="Connection Manager for Azure Storage"
+                      name="Azure Storage" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input]"
+                      hasSideEffects="true"
+                      name="Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[ITEM]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="ITEM"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[ITEM]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ITEM]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[ALTITEM]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="ALTITEM"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[ALTITEM]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ALTITEM]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[LOC]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="LOC"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[LOC]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[LOC]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[EFF]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="EFF"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[EFF]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[EFF]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[DISC]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="DISC"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[DISC]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[DISC]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[ALTITEMPRIORITY]"
+                          cachedDataType="numeric"
+                          cachedName="ALTITEMPRIORITY"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[ALTITEMPRIORITY]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ALTITEMPRIORITY]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[USEUNTILLEVEL]"
+                          cachedDataType="numeric"
+                          cachedName="USEUNTILLEVEL"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[USEUNTILLEVEL]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[USEUNTILLEVEL]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[RESPECTSSLEVELSW]"
+                          cachedDataType="i1"
+                          cachedName="RESPECTSSLEVELSW"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[RESPECTSSLEVELSW]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[RESPECTSSLEVELSW]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[DMDUSAGERULE]"
+                          cachedDataType="numeric"
+                          cachedName="DMDUSAGERULE"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[DMDUSAGERULE]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[DMDUSAGERULE]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[DRAWQTY]"
+                          cachedDataType="r8"
+                          cachedName="DRAWQTY"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[DRAWQTY]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[DRAWQTY]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[ROUNDINGQTY]"
+                          cachedDataType="r8"
+                          cachedName="ROUNDINGQTY"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[ROUNDINGQTY]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ROUNDINGQTY]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[SUPPLYCAP]"
+                          cachedDataType="r8"
+                          cachedName="SUPPLYCAP"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[SUPPLYCAP]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[SUPPLYCAP]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[MINALLOCQTY]"
+                          cachedDataType="numeric"
+                          cachedName="MINALLOCQTY"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[MINALLOCQTY]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[MINALLOCQTY]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[DMDGROUP]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="DMDGROUP"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[DMDGROUP]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[DMDGROUP]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[ENABLEOPT]"
+                          cachedDataType="numeric"
+                          cachedName="ENABLEOPT"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[ENABLEOPT]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ENABLEOPT]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[ErrorCode]"
+                          cachedDataType="i4"
+                          cachedName="ErrorCode"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[ErrorCode]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[ErrorColumn]"
+                          cachedDataType="i4"
+                          cachedName="ErrorColumn"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[ErrorColumn]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[ITEM]"
+                          dataType="wstr"
+                          length="50"
+                          name="ITEM" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[ALTITEM]"
+                          dataType="wstr"
+                          length="50"
+                          name="ALTITEM" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[LOC]"
+                          dataType="wstr"
+                          length="50"
+                          name="LOC" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[EFF]"
+                          dataType="dbTimeStamp"
+                          name="EFF" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[DISC]"
+                          dataType="dbTimeStamp"
+                          name="DISC" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[ALTITEMPRIORITY]"
+                          dataType="numeric"
+                          name="ALTITEMPRIORITY"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[USEUNTILLEVEL]"
+                          dataType="numeric"
+                          name="USEUNTILLEVEL"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[RESPECTSSLEVELSW]"
+                          dataType="i1"
+                          name="RESPECTSSLEVELSW" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[DMDUSAGERULE]"
+                          dataType="numeric"
+                          name="DMDUSAGERULE"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[DRAWQTY]"
+                          dataType="r8"
+                          name="DRAWQTY" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[ROUNDINGQTY]"
+                          dataType="r8"
+                          name="ROUNDINGQTY" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[SUPPLYCAP]"
+                          dataType="r8"
+                          name="SUPPLYCAP" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[MINALLOCQTY]"
+                          dataType="numeric"
+                          name="MINALLOCQTY"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[DMDGROUP]"
+                          dataType="wstr"
+                          length="50"
+                          name="DMDGROUP" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[ENABLEOPT]"
+                          dataType="numeric"
+                          name="ENABLEOPT"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[ErrorCode]"
+                          dataType="i4"
+                          name="ErrorCode" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[ErrorColumn]"
+                          dataType="i4"
+                          name="ErrorColumn" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                </component>
+                <component
+                  refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination"
+                  componentClassID="Microsoft.ManagedComponentHost"
+                  contactInfo="© Microsoft Corporation; All Rights Reserved;"
+                  description="Loads data into a blob in Azure Storage. The supported file formats are: Text and Avro. To work with Azure Data Lake Storage Gen2, use Flexible File Destination with Azure Storage Connection Manager instead."
+                  name="Supersession_success_Azure Blob Destination"
+                  validateExternalMetadata="False">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="The name of blob container"
+                      expressionType="Notify"
+                      name="Blob Container">jda2snowflakestage</property>
+                    <property
+                      dataType="System.String"
+                      description="The full name of blob"
+                      expressionType="Notify"
+                      name="Blob Name">JDA\Supersession\Supersession_20210303_1345_success.csv</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The format of blob file"
+                      name="Blob Format"
+                      typeConverter="Microsoft.SqlServer.IntegrationService.CloudComponents.Utilities.AzBlobFormatEnumStringConverter">0</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Compress File"
+                      name="Compress File">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The compression type"
+                      name="Compression Type"
+                      typeConverter="Microsoft.SqlServer.IntegrationService.CloudComponents.Utilities.AzCompressionTypeEnumStringConverter">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The compression level"
+                      name="Compression Level"
+                      typeConverter="Microsoft.SqlServer.IntegrationService.CloudComponents.Utilities.AzCompressionLevelEnumStringConverter">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The character used to delimit columns in text file"
+                      name="Column Delimiter">|</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Column names in the first data row"
+                      name="First Row as Column Names">false</property>
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">AzBlobDest</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Connections[Azure Storage]"
+                      connectionManagerID="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+                      connectionManagerRefId="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+                      description="Connection Manager for Azure Storage"
+                      name="Azure Storage" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input]"
+                      hasSideEffects="true"
+                      name="Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].Columns[ITEM]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="ITEM"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[ITEM]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[ITEM]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].Columns[ALTITEM]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="ALTITEM"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[ALTITEM]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[ALTITEM]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].Columns[LOC]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="LOC"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[LOC]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[LOC]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].Columns[EFF]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="EFF"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[EFF]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[EFF]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].Columns[DISC]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="DISC"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[DISC]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[DISC]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].Columns[ALTITEMPRIORITY]"
+                          cachedDataType="numeric"
+                          cachedName="ALTITEMPRIORITY"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[ALTITEMPRIORITY]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[ALTITEMPRIORITY]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].Columns[USEUNTILLEVEL]"
+                          cachedDataType="numeric"
+                          cachedName="USEUNTILLEVEL"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[USEUNTILLEVEL]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[USEUNTILLEVEL]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].Columns[RESPECTSSLEVELSW]"
+                          cachedDataType="i1"
+                          cachedName="RESPECTSSLEVELSW"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[RESPECTSSLEVELSW]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[RESPECTSSLEVELSW]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].Columns[DMDUSAGERULE]"
+                          cachedDataType="numeric"
+                          cachedName="DMDUSAGERULE"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[DMDUSAGERULE]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[DMDUSAGERULE]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].Columns[DRAWQTY]"
+                          cachedDataType="r8"
+                          cachedName="DRAWQTY"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[DRAWQTY]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[DRAWQTY]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].Columns[ROUNDINGQTY]"
+                          cachedDataType="r8"
+                          cachedName="ROUNDINGQTY"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[ROUNDINGQTY]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[ROUNDINGQTY]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].Columns[SUPPLYCAP]"
+                          cachedDataType="r8"
+                          cachedName="SUPPLYCAP"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[SUPPLYCAP]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[SUPPLYCAP]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].Columns[MINALLOCQTY]"
+                          cachedDataType="numeric"
+                          cachedName="MINALLOCQTY"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[MINALLOCQTY]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[MINALLOCQTY]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].Columns[DMDGROUP]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="DMDGROUP"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[DMDGROUP]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[DMDGROUP]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].Columns[ENABLEOPT]"
+                          cachedDataType="numeric"
+                          cachedName="ENABLEOPT"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[ENABLEOPT]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output].Columns[ENABLEOPT]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[ITEM]"
+                          dataType="wstr"
+                          length="50"
+                          name="ITEM" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[ALTITEM]"
+                          dataType="wstr"
+                          length="50"
+                          name="ALTITEM" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[LOC]"
+                          dataType="wstr"
+                          length="50"
+                          name="LOC" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[EFF]"
+                          dataType="dbTimeStamp"
+                          name="EFF" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[DISC]"
+                          dataType="dbTimeStamp"
+                          name="DISC" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[ALTITEMPRIORITY]"
+                          dataType="numeric"
+                          name="ALTITEMPRIORITY"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[USEUNTILLEVEL]"
+                          dataType="numeric"
+                          name="USEUNTILLEVEL"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[RESPECTSSLEVELSW]"
+                          dataType="i1"
+                          name="RESPECTSSLEVELSW" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[DMDUSAGERULE]"
+                          dataType="numeric"
+                          name="DMDUSAGERULE"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[DRAWQTY]"
+                          dataType="r8"
+                          name="DRAWQTY" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[ROUNDINGQTY]"
+                          dataType="r8"
+                          name="ROUNDINGQTY" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[SUPPLYCAP]"
+                          dataType="r8"
+                          name="SUPPLYCAP" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[MINALLOCQTY]"
+                          dataType="numeric"
+                          name="MINALLOCQTY"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[DMDGROUP]"
+                          dataType="wstr"
+                          length="50"
+                          name="DMDGROUP" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[ENABLEOPT]"
+                          dataType="numeric"
+                          name="ENABLEOPT"
+                          precision="38" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Supersession_SequenceContainer\Supersession_DFT.Paths[Oracle Source Error Output]"
+                  endId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination.Inputs[Input]"
+                  name="Oracle Source Error Output"
+                  startId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Error Output]" />
+                <path
+                  refId="Package\Supersession_SequenceContainer\Supersession_DFT.Paths[Oracle Source Output]"
+                  endId="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination.Inputs[Input]"
+                  name="Oracle Source Output"
+                  startId="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source.Outputs[Oracle Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Supersession_SequenceContainer\Supersession_Validations"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{D2A6B9F6-332F-4BDB-9A30-DC75FA4B57DE}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Supersession_Validations"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:PropertyExpression
+            DTS:Name="[Supersession_fail_Azure Blob Destination].[Blob Name]">@[User::Supersession_FileName_fail_validations]</DTS:PropertyExpression>
+          <DTS:PropertyExpression
+            DTS:Name="[Supersession_success_Azure Blob Destination].[Blob Name]">@[User::Supersession_FileName_success_validations]</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source"
+                  componentClassID="Microsoft.SSISOracleSrc"
+                  contactInfo="Oracle Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Oracle Source"
+                  name="Oracle Source"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="The name of the table to be fetched."
+                      expressionType="Notify"
+                      name="TableName"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      expressionType="Notify"
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select count(*) as RECORD_COUNT
+,'64.26.225.183/PRBPRDDB:JDA' as SERVER_NAME
+,'SCPOMGR.Supersession' as TABLE_NAME
+,TO_CHAR(SYSDATE,'YYYYMMDD') as ETL_DATE
+from SCPOMGR.Supersession</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the number of rows fetched per batch."
+                      expressionType="Notify"
+                      name="BatchSize">1000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Determines the chunk size allocation for LOB columns"
+                      expressionType="Notify"
+                      name="LobChunkSize">32768</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The code page to use when code page information is unavailable from the data source."
+                      expressionType="Notify"
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Number of pre-fetched rows."
+                      expressionType="Notify"
+                      name="PrefetchCount">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">1</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Connections[ORACLEConnection]"
+                      connectionManagerID="Package.ConnectionManagers[JDA Prod v18]"
+                      connectionManagerRefId="Package.ConnectionManagers[JDA Prod v18]"
+                      description="The ORACLE runtime connection used to access the database."
+                      name="ORACLEConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output]"
+                      errorRowDisposition="RedirectRow"
+                      name="Oracle Source Output"
+                      truncationRowDisposition="RedirectRow">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].Columns[RECORD_COUNT]"
+                          dataType="r8"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RECORD_COUNT]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].Columns[RECORD_COUNT]"
+                          name="RECORD_COUNT" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].Columns[SERVER_NAME]"
+                          dataType="wstr"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SERVER_NAME]"
+                          length="26"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].Columns[SERVER_NAME]"
+                          name="SERVER_NAME" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].Columns[TABLE_NAME]"
+                          dataType="wstr"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TABLE_NAME]"
+                          length="20"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].Columns[TABLE_NAME]"
+                          name="TABLE_NAME" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].Columns[ETL_DATE]"
+                          dataType="wstr"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ETL_DATE]"
+                          length="8"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].Columns[ETL_DATE]"
+                          name="ETL_DATE" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RECORD_COUNT]"
+                          dataType="r8"
+                          name="RECORD_COUNT" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SERVER_NAME]"
+                          dataType="wstr"
+                          length="26"
+                          name="SERVER_NAME" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TABLE_NAME]"
+                          dataType="wstr"
+                          length="20"
+                          name="TABLE_NAME" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ETL_DATE]"
+                          dataType="wstr"
+                          length="8"
+                          name="ETL_DATE" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Error Output]"
+                      isErrorOut="true"
+                      name="Oracle Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Error Output].Columns[RECORD_COUNT]"
+                          dataType="r8"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RECORD_COUNT]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Error Output].Columns[RECORD_COUNT]"
+                          name="RECORD_COUNT" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Error Output].Columns[SERVER_NAME]"
+                          dataType="wstr"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SERVER_NAME]"
+                          length="26"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Error Output].Columns[SERVER_NAME]"
+                          name="SERVER_NAME" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Error Output].Columns[TABLE_NAME]"
+                          dataType="wstr"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TABLE_NAME]"
+                          length="20"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Error Output].Columns[TABLE_NAME]"
+                          name="TABLE_NAME" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Error Output].Columns[ETL_DATE]"
+                          dataType="wstr"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ETL_DATE]"
+                          length="8"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Error Output].Columns[ETL_DATE]"
+                          name="ETL_DATE" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination"
+                  componentClassID="Microsoft.ManagedComponentHost"
+                  contactInfo="© Microsoft Corporation; All Rights Reserved;"
+                  description="Loads data into a blob in Azure Storage. The supported file formats are: Text and Avro. To work with Azure Data Lake Storage Gen2, use Flexible File Destination with Azure Storage Connection Manager instead."
+                  name="Supersession_fail_Azure Blob Destination"
+                  validateExternalMetadata="False">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="The name of blob container"
+                      expressionType="Notify"
+                      name="Blob Container">jda2snowflakestage</property>
+                    <property
+                      dataType="System.String"
+                      description="The full name of blob"
+                      expressionType="Notify"
+                      name="Blob Name">JDA\Error\Supersession_validation_20210303_1345_fail.csv</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The format of blob file"
+                      name="Blob Format"
+                      typeConverter="Microsoft.SqlServer.IntegrationService.CloudComponents.Utilities.AzBlobFormatEnumStringConverter">0</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Compress File"
+                      name="Compress File">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The compression type"
+                      name="Compression Type"
+                      typeConverter="Microsoft.SqlServer.IntegrationService.CloudComponents.Utilities.AzCompressionTypeEnumStringConverter">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The compression level"
+                      name="Compression Level"
+                      typeConverter="Microsoft.SqlServer.IntegrationService.CloudComponents.Utilities.AzCompressionLevelEnumStringConverter">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The character used to delimit columns in text file"
+                      name="Column Delimiter">|</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Column names in the first data row"
+                      name="First Row as Column Names">false</property>
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">AzBlobDest</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Connections[Azure Storage]"
+                      connectionManagerID="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+                      connectionManagerRefId="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+                      description="Connection Manager for Azure Storage"
+                      name="Azure Storage" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Inputs[Input]"
+                      hasSideEffects="true"
+                      name="Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[RECORD_COUNT]"
+                          cachedDataType="r8"
+                          cachedName="RECORD_COUNT"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[RECORD_COUNT]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Error Output].Columns[RECORD_COUNT]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[SERVER_NAME]"
+                          cachedDataType="wstr"
+                          cachedLength="26"
+                          cachedName="SERVER_NAME"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[SERVER_NAME]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Error Output].Columns[SERVER_NAME]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[TABLE_NAME]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="TABLE_NAME"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[TABLE_NAME]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Error Output].Columns[TABLE_NAME]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[ETL_DATE]"
+                          cachedDataType="wstr"
+                          cachedLength="8"
+                          cachedName="ETL_DATE"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[ETL_DATE]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Error Output].Columns[ETL_DATE]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[ErrorCode]"
+                          cachedDataType="i4"
+                          cachedName="ErrorCode"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[ErrorCode]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Inputs[Input].Columns[ErrorColumn]"
+                          cachedDataType="i4"
+                          cachedName="ErrorColumn"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[ErrorColumn]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[RECORD_COUNT]"
+                          dataType="r8"
+                          name="RECORD_COUNT" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[SERVER_NAME]"
+                          dataType="wstr"
+                          length="26"
+                          name="SERVER_NAME" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[TABLE_NAME]"
+                          dataType="wstr"
+                          length="20"
+                          name="TABLE_NAME" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[ETL_DATE]"
+                          dataType="wstr"
+                          length="8"
+                          name="ETL_DATE" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[ErrorCode]"
+                          dataType="i4"
+                          name="ErrorCode" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Inputs[Input].ExternalColumns[ErrorColumn]"
+                          dataType="i4"
+                          name="ErrorColumn" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                </component>
+                <component
+                  refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_success_Azure Blob Destination"
+                  componentClassID="Microsoft.ManagedComponentHost"
+                  contactInfo="© Microsoft Corporation; All Rights Reserved;"
+                  description="Loads data into a blob in Azure Storage. The supported file formats are: Text and Avro. To work with Azure Data Lake Storage Gen2, use Flexible File Destination with Azure Storage Connection Manager instead."
+                  name="Supersession_success_Azure Blob Destination"
+                  validateExternalMetadata="False">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="The name of blob container"
+                      expressionType="Notify"
+                      name="Blob Container">jda2snowflakestage</property>
+                    <property
+                      dataType="System.String"
+                      description="The full name of blob"
+                      expressionType="Notify"
+                      name="Blob Name">JDA\Source_Logging\Supersession_20210303_1345.csv</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The format of blob file"
+                      name="Blob Format"
+                      typeConverter="Microsoft.SqlServer.IntegrationService.CloudComponents.Utilities.AzBlobFormatEnumStringConverter">0</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Compress File"
+                      name="Compress File">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The compression type"
+                      name="Compression Type"
+                      typeConverter="Microsoft.SqlServer.IntegrationService.CloudComponents.Utilities.AzCompressionTypeEnumStringConverter">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The compression level"
+                      name="Compression Level"
+                      typeConverter="Microsoft.SqlServer.IntegrationService.CloudComponents.Utilities.AzCompressionLevelEnumStringConverter">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The character used to delimit columns in text file"
+                      name="Column Delimiter">|</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Column names in the first data row"
+                      name="First Row as Column Names">false</property>
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">AzBlobDest</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_success_Azure Blob Destination.Connections[Azure Storage]"
+                      connectionManagerID="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+                      connectionManagerRefId="Package.ConnectionManagers[SSIS Connection Manager for Azure Storage]"
+                      description="Connection Manager for Azure Storage"
+                      name="Azure Storage" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_success_Azure Blob Destination.Inputs[Input]"
+                      hasSideEffects="true"
+                      name="Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_success_Azure Blob Destination.Inputs[Input].Columns[RECORD_COUNT]"
+                          cachedDataType="r8"
+                          cachedName="RECORD_COUNT"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[RECORD_COUNT]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].Columns[RECORD_COUNT]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_success_Azure Blob Destination.Inputs[Input].Columns[SERVER_NAME]"
+                          cachedDataType="wstr"
+                          cachedLength="26"
+                          cachedName="SERVER_NAME"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[SERVER_NAME]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].Columns[SERVER_NAME]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_success_Azure Blob Destination.Inputs[Input].Columns[TABLE_NAME]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="TABLE_NAME"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[TABLE_NAME]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].Columns[TABLE_NAME]" />
+                        <inputColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_success_Azure Blob Destination.Inputs[Input].Columns[ETL_DATE]"
+                          cachedDataType="wstr"
+                          cachedLength="8"
+                          cachedName="ETL_DATE"
+                          externalMetadataColumnId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[ETL_DATE]"
+                          lineageId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output].Columns[ETL_DATE]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[RECORD_COUNT]"
+                          dataType="r8"
+                          name="RECORD_COUNT" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[SERVER_NAME]"
+                          dataType="wstr"
+                          length="26"
+                          name="SERVER_NAME" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[TABLE_NAME]"
+                          dataType="wstr"
+                          length="20"
+                          name="TABLE_NAME" />
+                        <externalMetadataColumn
+                          refId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_success_Azure Blob Destination.Inputs[Input].ExternalColumns[ETL_DATE]"
+                          dataType="wstr"
+                          length="8"
+                          name="ETL_DATE" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Supersession_SequenceContainer\Supersession_Validations.Paths[Oracle Source Error Output]"
+                  endId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination.Inputs[Input]"
+                  name="Oracle Source Error Output"
+                  startId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Error Output]" />
+                <path
+                  refId="Package\Supersession_SequenceContainer\Supersession_Validations.Paths[Oracle Source Output]"
+                  endId="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_success_Azure Blob Destination.Inputs[Input]"
+                  name="Oracle Source Output"
+                  startId="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source.Outputs[Oracle Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Supersession_SequenceContainer.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{D0D276BF-14EA-48A4-AED9-C3969F863A08}"
+          DTS:From="Package\Supersession_SequenceContainer\Supersession_DFT"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Supersession_SequenceContainer\Supersession_Validations" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Supersession_SequenceContainer\Supersession_DFT"
+          TopLeft="64,33" />
+        <NodeLayout
+          Size="206,42"
+          Id="Package\Supersession_SequenceContainer\Supersession_Validations"
+          TopLeft="106,121" />
+        <EdgeLayout
+          Id="Package\Supersession_SequenceContainer.PrecedenceConstraints[Constraint]"
+          TopLeft="150.5,75">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="58.5,46"
+              Start="0,0"
+              End="58.5,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19"
+                    Point2="0,23"
+                    Point3="4,23" />
+                  <mssgle:LineSegment
+                    End="54.5,23" />
+                  <mssgle:CubicBezierSegment
+                    Point1="54.5,23"
+                    Point2="58.5,23"
+                    Point3="58.5,27" />
+                  <mssgle:LineSegment
+                    End="58.5,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="376,218"
+          Size="376,261"
+          Id="Package\Supersession_SequenceContainer"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Supersession_SequenceContainer\Supersession_DFT">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="284,42"
+          Id="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination"
+          TopLeft="0,170" />
+        <NodeLayout
+          Size="149,42"
+          Id="Package\Supersession_SequenceContainer\Supersession_DFT\Oracle Source"
+          TopLeft="192,66" />
+        <NodeLayout
+          Size="309,42"
+          Id="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination"
+          TopLeft="304,169" />
+        <EdgeLayout
+          Id="Package\Supersession_SequenceContainer\Supersession_DFT.Paths[Oracle Source Output]"
+          TopLeft="290,108">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="168.5,61"
+              Start="0,0"
+              End="168.5,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.7888446215139" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.7888446215139"
+                    Point2="0,24.7888446215139"
+                    Point3="4,24.7888446215139" />
+                  <mssgle:LineSegment
+                    End="164.5,24.7888446215139" />
+                  <mssgle:CubicBezierSegment
+                    Point1="164.5,24.7888446215139"
+                    Point2="168.5,24.7888446215139"
+                    Point3="168.5,28.7888446215139" />
+                  <mssgle:LineSegment
+                    End="168.5,53.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Supersession_SequenceContainer\Supersession_DFT.Paths[Oracle Source Error Output]"
+          TopLeft="266.5,108">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-124.5,62"
+              Start="0,0"
+              End="-124.5,54.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27"
+                    Point2="0,31"
+                    Point3="-4,31" />
+                  <mssgle:LineSegment
+                    End="-120.5,31" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-120.5,31"
+                    Point2="-124.5,31"
+                    Point3="-124.5,35" />
+                  <mssgle:LineSegment
+                    End="-124.5,54.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-122.99390625,36,121.4878125,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_fail_Azure Blob Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Supersession_SequenceContainer\Supersession_DFT\Supersession_success_Azure Blob Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Supersession_SequenceContainer\Supersession_Validations">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="149,42"
+          Id="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source"
+          TopLeft="180,60" />
+        <NodeLayout
+          Size="284,42"
+          Id="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination"
+          TopLeft="0,174" />
+        <NodeLayout
+          Size="309,42"
+          Id="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_success_Azure Blob Destination"
+          TopLeft="314,175" />
+        <EdgeLayout
+          Id="Package\Supersession_SequenceContainer\Supersession_Validations.Paths[Oracle Source Error Output]"
+          TopLeft="231,102">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-89,72"
+              Start="0,0"
+              End="-89,64.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.2589641434263" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.2589641434263"
+                    Point2="0,29.2589641434263"
+                    Point3="-4,29.2589641434263" />
+                  <mssgle:LineSegment
+                    End="-85,29.2589641434263" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-85,29.2589641434263"
+                    Point2="-89,29.2589641434263"
+                    Point3="-89,33.2589641434263" />
+                  <mssgle:LineSegment
+                    End="-89,64.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-105.24390625,34.2589641434263,121.4878125,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Supersession_SequenceContainer\Supersession_Validations.Paths[Oracle Source Output]"
+          TopLeft="278,102">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="190.5,73"
+              Start="0,0"
+              End="190.5,65.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.6653386454183" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.6653386454183"
+                    Point2="0,29.6653386454183"
+                    Point3="4,29.6653386454183" />
+                  <mssgle:LineSegment
+                    End="186.5,29.6653386454183" />
+                  <mssgle:CubicBezierSegment
+                    Point1="186.5,29.6653386454183"
+                    Point2="190.5,29.6653386454183"
+                    Point3="190.5,33.6653386454183" />
+                  <mssgle:LineSegment
+                    End="190.5,65.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_fail_Azure Blob Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Supersession_SequenceContainer\Supersession_Validations\Supersession_success_Azure Blob Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Supersession_SequenceContainer\Supersession_Validations\Oracle Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
